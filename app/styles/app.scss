@@ -1,0 +1,68 @@
+.app{
+  width: 100%;
+  overflow: auto;
+
+  .liquidFillGaugeText, .liquidFillGaugeTextOverlap {
+    cursor: default;
+    font-family: Helvetica;
+    font-weight: bold;
+  }
+
+  .low {
+    .liquidFillGaugeText {
+      fill: #1748ff;
+    }
+    .liquidFillGaugeTextOverlap{
+      fill: #2fa5ff;
+    }
+    .Circle {
+      fill: #ff3635;
+    }
+    .Wave {
+      fill: #60e2ff;
+    }
+  }
+
+  .medium {
+    .liquidFillGaugeText {
+      fill: #1748ff;
+    }
+    .liquidFillGaugeTextOverlap{
+      fill: #2fa5ff;
+    }
+    .Circle {
+      fill: #fff114;
+    }
+    .Wave {
+      fill: #60e2ff;
+    }
+  }
+
+  .high {
+    .liquidFillGaugeText {
+      fill: #1748ff;
+    }
+    .liquidFillGaugeTextOverlap{
+      fill: #2fa5ff;
+    }
+    .Circle {
+      fill: #24ff1f;
+    }
+    .Wave {
+      fill: #60e2ff;
+    }
+  }
+  $widgetHeight: 70vh;
+
+  .chart {
+    margin: auto;
+    padding: 20px 0;
+    width: 90%;
+    height: $widgetHeight;
+  }
+
+  .gauge{
+    height: $widgetHeight;
+    padding: 10px;
+  }
+}
