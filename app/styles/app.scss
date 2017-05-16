@@ -8,6 +8,10 @@
     font-weight: bold;
   }
 
+  .liquidFillGaugeText, .liquidFillGaugeTextOverlap, .Circle, .Wave{
+    transition: 0.5s;
+  }
+
   .low {
     .liquidFillGaugeText {
       fill: #1748ff;

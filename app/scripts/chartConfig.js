@@ -16,6 +16,8 @@ data1 = asd(data1);
 var data2 = [6,5,4,3,2,1];
 data2 = asd(data2);
 
+var dysplayYAxis = true;
+
 var scatterChart = new Chart(ctx, {
   type: 'line',
   data: {
@@ -53,31 +55,39 @@ var scatterChart = new Chart(ctx, {
       duration: 100
     },
     scales: {
-      yAxes:[{
+      yAxes:[
+        {
+          display: dysplayYAxis,
         position: 'left',
+        scaleShowLabels: false,
         ticks: {
           min: 0,
           max: 200
         },
         gridLines: {
-          display: false
+          display: false,
+          drawBorder: false
         },
       },
         {
+          display: dysplayYAxis,
           position: 'right',
           ticks: {
             min: 0,
             max: 200
           },
           gridLines: {
-            display: false
+            display: false,
+            drawBorder: false
           },
-        }],
+        }
+        ],
       xAxes: [{
         type: 'linear',
         position: 'bottom',
         gridLines: {
-          display: false
+          display: false,
+          drawBorder: false
         },
         ticks:{
           min: 0,

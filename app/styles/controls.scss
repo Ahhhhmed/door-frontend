@@ -1,4 +1,19 @@
 .controls{
   background: #5e5c62;
   width: 100%;
+
+  //$controlsHeight
+  //$controlsHeightBig
+
+  .main-controls{
+    background: red;
+    width: 100%;
+    height: 60px;
+  }
+
+  .slider{
+    background: blue;
+    width: 100%;
+    height: 40px;
+  }
 }
