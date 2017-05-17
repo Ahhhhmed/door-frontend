@@ -1,12 +1,13 @@
 
 
-var mode = 0
 function switchMode(){
-  if(mode==0){
-    $('body').addClass('mode2');
-    mode = 1;
-  } else {
-    $('body').removeClass('mode2');
-    mode = 0;
-  }
+  $('body').toggleClass('mode2');
 }
+
+$(document).ready(function() {
+  var icon = $('.play');
+  icon.click(function() {
+    icon.toggleClass('active');
+    return false;
+  });
+});
