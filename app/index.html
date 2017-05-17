@@ -25,10 +25,7 @@
     <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="controls" onclick="switchMode()">
-      <div class="main-controls"></div>
-      <div class="slider"></div>
-    </div>
+
     <div class="app">
       <div class="chart">
         <canvas id="myChart" width="100" height="100"></canvas>
@@ -37,7 +34,10 @@
         <svg id="fillgauge1" width="100%" height="100%" onclick="gauge1.update(NewValue());"></svg>
       </div>
     </div>
-
+    <div class="controls" onclick="switchMode()">
+      <div class="slider"></div>
+      <div class="main-controls"></div>
+    </div>
 
 
     <!-- build:js scripts/vendor.js -->

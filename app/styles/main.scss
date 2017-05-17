@@ -63,6 +63,11 @@ $controlsHeightBig: 100px;
   transition: 1s;
 }
 
+.slider{
+  height: 0;
+  transition: 0.5s;
+}
+
 .mode2{
   .app{
     height: calc(100% - #{$controlsHeightBig});
@@ -71,6 +76,10 @@ $controlsHeightBig: 100px;
 
   .controls{
     height: $controlsHeightBig;
+  }
+
+  .slider{
+    height: 40px;
   }
 }
 
