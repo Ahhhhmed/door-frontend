@@ -1,6 +1,7 @@
+$backgroundColor1: #f0a2cc;
+$backgroundColor2: #3cb8a5;
 
-$background:red;
-$foreground:#2c3e50;
+$foreground: #393eb5;
 
 $foreground-light:#34495e;
 
@@ -41,6 +42,19 @@ $transition-time:0.5s;
     }
   }
 
+  &:after {
+    content:'';
+    opacity:0;
+    width:($size*1.4);
+    height:($size*1.6);
+    background:$foreground;
+    position:absolute;
+    right: ($size*0.1);
+    top: ($size*-0.8);
+    border-left:($size*0.45) solid $foreground;
+    box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor2;
+  }
+
   &.active {
     border-color:transparent;
     &:after {
@@ -53,8 +67,15 @@ $transition-time:0.5s;
       right: ($size*0.1);
       top: ($size*-0.8);
       border-left:($size*0.45) solid $foreground;
-      box-shadow:inset ($size*0.45) 0 0 0 $background;
+      box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor2;
+      transition: 0.5s;
     }
   }
 }
+.mode2 .play.active:after {
+  box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor1;
+}
 
+.mode2 .play:after {
+  box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor1;
+}

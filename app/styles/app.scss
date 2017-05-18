@@ -1,3 +1,7 @@
+$waterColor: #a44497;
+$textColor1: white;
+$textColor2: black;
+
 .app{
   width: 100%;
   overflow: auto;
@@ -9,51 +13,51 @@
   }
 
   .liquidFillGaugeText, .liquidFillGaugeTextOverlap, .Circle, .Wave{
-    transition: 0.5s;
+    transition: fill 1s;
   }
 
   .low {
     .liquidFillGaugeText {
-      fill: #1748ff;
+      fill: $textColor1;
     }
     .liquidFillGaugeTextOverlap{
-      fill: #2fa5ff;
+      fill: $textColor2;
     }
     .Circle {
-      fill: #ff3635;
+      fill: #ff3338;
     }
     .Wave {
-      fill: #60e2ff;
+      fill: $waterColor;
     }
   }
 
   .medium {
     .liquidFillGaugeText {
-      fill: #1748ff;
+      fill: $textColor1;
     }
     .liquidFillGaugeTextOverlap{
-      fill: #2fa5ff;
+      fill: $textColor2;
     }
     .Circle {
-      fill: #fff114;
+      fill: #fff741;
     }
     .Wave {
-      fill: #60e2ff;
+      fill: $waterColor;
     }
   }
 
   .high {
     .liquidFillGaugeText {
-      fill: #1748ff;
+      fill: $textColor1;
     }
     .liquidFillGaugeTextOverlap{
-      fill: #2fa5ff;
+      fill: $textColor2;
     }
     .Circle {
       fill: #24ff1f;
     }
     .Wave {
-      fill: #60e2ff;
+      fill: $waterColor;
     }
   }
   $widgetHeight: 70vh;

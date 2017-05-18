@@ -52,15 +52,19 @@ body {
 $controlsHeight: 60px;
 $controlsHeightBig: 100px;
 
+$backgroundColor1: #f0a2cc;
+$backgroundColor2: #3cb8a5;
+
 .app{
   height: calc(100% - #{$controlsHeight});
   transition: 0.5s;
-  background: #feffc5;
+  background: $backgroundColor1;
 }
 
 .controls{
   height: $controlsHeight;
-  transition: 1s;
+  background: $backgroundColor2;
+  transition: 0.5s;
 }
 
 .slider{
@@ -71,11 +75,16 @@ $controlsHeightBig: 100px;
 .mode2{
   .app{
     height: calc(100% - #{$controlsHeightBig});
-    background: #cafdff;
+    background: $backgroundColor2;
   }
 
   .controls{
     height: $controlsHeightBig;
+    background: $backgroundColor1;
+
+    input[type=range]{
+      visibility: visible;
+    }
   }
 
   .slider{

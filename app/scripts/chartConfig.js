@@ -23,7 +23,7 @@ var scatterChart = new Chart(ctx, {
   data: {
     datasets: [{
       fill: false,
-      borderColor: "#ff2c36",
+      borderColor: "#f16e2d",
       pointBorderColor: "rgba(0,0,0,0)",
       pointBackgroundColor: "rgba(0,0,0,0)",
       pointHoverBackgroundColor: "rgba(0,0,0,0)",
@@ -33,7 +33,7 @@ var scatterChart = new Chart(ctx, {
     },
       {
         fill: false,
-        borderColor: "#51f93d",
+        borderColor: "#0956a2",
         pointBorderColor: "rgba(0,0,0,0)",
         pointBackgroundColor: "rgba(0,0,0,0)",
         pointHoverBackgroundColor: "rgba(0,0,0,0)",

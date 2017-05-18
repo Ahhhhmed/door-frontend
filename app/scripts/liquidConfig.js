@@ -1,8 +1,4 @@
 var config1 = liquidFillGaugeDefaultSettings();
-config1.circleColor = "#ff20ea";
-config1.textColor = "#FF4444";
-config1.waveTextColor = "#FFAAAA";
-config1.waveColor = "#FFDDDD";
 config1.circleThickness = 0.1;
 config1.waveAnimateTime = 500;
 config1.waveRiseTime = 100;

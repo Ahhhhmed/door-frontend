@@ -7,7 +7,7 @@
     <title>front</title>
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+    <script src="http://d3js.org/d3.v3.js" language="JavaScript"></script>
     <script src="scripts/liquid.js" language="JavaScript"></script>
     <!-- Place favicon.ico in the root directory -->
 
@@ -17,6 +17,7 @@
     <!-- endbuild -->
 
     <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="/bower_components/jquery-ui/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 
@@ -35,7 +36,10 @@
       </div>
     </div>
     <div class="controls">
-      <div class="slider"></div>
+      <div class="slider">
+        <input type="range"></input>
+        <!--<div id="slider"></div>-->
+      </div>
       <div class="main-controls">
         <div class="half">
           <div class="play"></div>
@@ -53,6 +57,7 @@
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="/bower_components/chart.js/dist/Chart.js"></script>
     <!-- endbower -->
     <!-- endbuild -->

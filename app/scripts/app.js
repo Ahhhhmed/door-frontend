@@ -11,3 +11,7 @@ $(document).ready(function() {
     return false;
   });
 });
+
+$( function() {
+  $( "#slider" ).slider();
+} );

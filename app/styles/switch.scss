@@ -1,3 +1,6 @@
+$backgroundColor1: #f0a2cc;
+$backgroundColor2: #3cb8a5;
+
 /* The switch - the box around the switch-slider */
 .switch {
   top: 15px;
@@ -18,9 +21,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  background-color: $backgroundColor1;
+  -webkit-transition: .5s;
+  transition: .5s;
 }
 
 .switch-slider:before {
@@ -31,17 +34,17 @@
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: .5s;
+  transition: .5s;
 }
 
 input:checked + .switch-slider {
-  background-color: #2196F3;
+  background-color: $backgroundColor2;
 }
 
-input:focus + .switch-slider {
-  box-shadow: 0 0 1px #2196F3;
-}
+//input:focus + .switch-slider {
+//  box-shadow: 0 0 1px #0bf325;
+//}
 
 input:checked + .switch-slider:before {
   -webkit-transform: translateX(26px);

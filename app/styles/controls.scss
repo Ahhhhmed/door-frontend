@@ -1,10 +1,6 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800);
-
 .controls{
-  background: #5e5c62;
   width: 100%;
-
-  font-family: 'Open Sans', sans-serif;
+  z-index: 1;
   text-align:center;
 
   //$controlsHeight
@@ -12,7 +8,6 @@
 
   .main-controls{
     display: flex;
-    background: red;
     width: 100%;
     height: 60px;
 
@@ -22,8 +17,51 @@
   }
 
   .slider{
-    background: blue;
     width: 100%;
   }
 
+  #slider{
+    height: 0;
+    border: 0;
+    top: 15px;
+    width: 95%;
+    left: 2.5%;
+
+    .ui-slider-handle{
+      border-radius: 50%;
+
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+
+  input[type=range]{
+    visibility: hidden;
+    width: 95%;
+    margin-top:10px;
+
+    //&::-webkit-slider-thumb{
+    //  -webkit-appearance: none;
+    //  border: 1px solid #000000;
+    //  height: 36px;
+    //  width: 16px;
+    //  border-radius: 3px;
+    //  background: #ffffff;
+    //  //cursor: pointer;
+    //  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    //  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    //}
+
+    &::-webkit-slider-runnable-track {
+      background: transparent;
+      //width: 100%;
+      //height: 0px;
+      //cursor: pointer;
+      //box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+      //background: #3071a9;
+      //border-radius: 1.3px;
+      //border: 0.2px solid #010101;
+    }
+  }
 }
