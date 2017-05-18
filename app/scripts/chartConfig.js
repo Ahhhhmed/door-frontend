@@ -31,16 +31,17 @@ var scatterChart = new Chart(ctx, {
       borderWidth: "2",
       data: data1
     },
-      {
-        fill: false,
-        borderColor: "#0956a2",
-        pointBorderColor: "rgba(0,0,0,0)",
-        pointBackgroundColor: "rgba(0,0,0,0)",
-        pointHoverBackgroundColor: "rgba(0,0,0,0)",
-        pointHoverBorderColor: "rgba(0,0,0,0)",
-        borderWidth: "2",
-        data: data1
-      }]
+      // {
+      //   fill: false,
+      //   borderColor: "#0956a2",
+      //   pointBorderColor: "rgba(0,0,0,0)",
+      //   pointBackgroundColor: "rgba(0,0,0,0)",
+      //   pointHoverBackgroundColor: "rgba(0,0,0,0)",
+      //   pointHoverBorderColor: "rgba(0,0,0,0)",
+      //   borderWidth: "2",
+      //   data: data1
+      // }
+      ]
   },
   options: {
     responsive: true,
@@ -91,23 +92,23 @@ var scatterChart = new Chart(ctx, {
         },
         ticks:{
           min: 0,
-          max: 200
+          max: 500
         }
       }]
     }
   }
 });
-setInterval(()=>{
-  var data = [];
-  var data2 = [];
-  for(var i=0; i < 200; i++){
-    data = data.concat([100 + Math.random() * 10]);
-    data2 = data2.concat([Math.random() * 10]);
-  }
-  data = asd(data);
-  data2 = asd(data2);
-  scatterChart.data.datasets[0].data = data;
-  scatterChart.data.datasets[1].data = data2;
-  scatterChart.update();
-
-}, 100);
+// setInterval(()=>{
+//   var data = [];
+//   var data2 = [];
+//   for(var i=0; i < 200; i++){
+//     data = data.concat([100 + Math.random() * 10]);
+//     data2 = data2.concat([Math.random() * 10]);
+//   }
+//   data = asd(data);
+//   data2 = asd(data2);
+//   scatterChart.data.datasets[0].data = data;
+//   scatterChart.data.datasets[1].data = data2;
+//   scatterChart.update();
+//
+// }, 100);
