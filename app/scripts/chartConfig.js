@@ -62,8 +62,8 @@ var scatterChart = new Chart(ctx, {
         position: 'left',
         scaleShowLabels: false,
         ticks: {
-          min: 0,
-          max: 200
+          min: -150,
+          max: -20
         },
         gridLines: {
           display: false,
@@ -74,8 +74,8 @@ var scatterChart = new Chart(ctx, {
           display: dysplayYAxis,
           position: 'right',
           ticks: {
-            min: 0,
-            max: 200
+            min: -150,
+            max: -20
           },
           gridLines: {
             display: false,
@@ -92,23 +92,25 @@ var scatterChart = new Chart(ctx, {
         },
         ticks:{
           min: 20,
-          max: 22000
+          max: 22000,
+          callback: function(tick, index, ticks) {
+            if(tick > 20000){
+              return "";
+            }
+            var str = "" + tick;
+            var ind = {
+              '1':true,
+              '2':true,
+              '4':true,
+              '5':true
+            };
+            if(str[0] == '4' && ("" + ticks[index+1])[0] == '5'){
+              return "";
+            }
+            return str[0] in ind?str : "";// new default function here
+          }
         }
       }]
     }
   }
 });
-// setInterval(()=>{
-//   var data = [];
-//   var data2 = [];
-//   for(var i=0; i < 200; i++){
-//     data = data.concat([100 + Math.random() * 10]);
-//     data2 = data2.concat([Math.random() * 10]);
-//   }
-//   data = asd(data);
-//   data2 = asd(data2);
-//   scatterChart.data.datasets[0].data = data;
-//   scatterChart.data.datasets[1].data = data2;
-//   scatterChart.update();
-//
-// }, 100);

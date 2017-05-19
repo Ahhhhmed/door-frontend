@@ -84,10 +84,11 @@ Visualizer.prototype = {
     // cheight = canvas.height - 2;
     // canvasCtx = canvas.getContext('2d');
     var bufferLength = analyser.frequencyBinCount;
-    var dataArray = new Uint8Array(bufferLength);
+    var dataArray = new Float32Array(bufferLength);
     var data = new Array(bufferLength);
-    for(var i=0; i<bufferLength; i++){
-      data[i] = {x:i*this.audioContext.sampleRate/analyser.fftSize};
+    for(var i=0, j = 0; i<bufferLength; j++ ){
+      data[j] = {x:i*this.audioContext.sampleRate/analyser.fftSize};
+      i +=  Math.floor(i/50) + 1;
     }
 
 
@@ -97,12 +98,13 @@ Visualizer.prototype = {
     var that = this;
     function draw() {
       var drawVisual = requestAnimationFrame(draw);
-      analyser.getByteFrequencyData(dataArray);
+      analyser.getFloatFrequencyData(dataArray);
       //  that.clarty(analyser)
       // canvasCtx.fillStyle = 'rgb(0, 0, 0)';
       // canvasCtx.fillRect(0, 0, cwidth, cheight);
-      for(var i=0; i<bufferLength; i++){
-        data[i].y = dataArray[i];
+      for(var i=0, j =0; i<bufferLength; j++){
+        data[j].y = dataArray[i];
+        i +=  Math.floor(i/50) + 1;
       }
 
       scatterChart.data.datasets[0].data = data;
