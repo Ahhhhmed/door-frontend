@@ -37,7 +37,7 @@
       fill: $textColor2;
     }
     .Circle {
-      fill: $mediumColor
+      fill: $mediumColor;
     }
     .Wave {
       fill: $waterColor;
@@ -70,5 +70,49 @@
   .gauge{
     height: $widgetHeight;
     padding: 10px;
+  }
+}
+.mode2 .app .low {
+  .liquidFillGaugeText {
+    fill: $textColor1Mode2;
+  }
+  .liquidFillGaugeTextOverlap{
+    fill: $textColor2Mode2;
+  }
+  .Circle {
+    fill: $lowColorMode2;
+  }
+  .Wave {
+    fill: $waterColorMode2;
+  }
+}
+
+.mode2 .app .medium {
+  .liquidFillGaugeText {
+    fill: $textColor1Mode2;
+  }
+  .liquidFillGaugeTextOverlap{
+    fill: $textColor2Mode2;
+  }
+  .Circle {
+    fill: $mediumColorMode2;
+  }
+  .Wave {
+    fill: $waterColorMode2;
+  }
+}
+
+.mode2 .app .high {
+  .liquidFillGaugeText {
+    fill: $textColor1Mode2;
+  }
+  .liquidFillGaugeTextOverlap {
+    fill: $textColor2Mode2;
+  }
+  .Circle {
+    fill: $highColorMode2;
+  }
+  .Wave {
+    fill: $waterColorMode2;
   }
 }

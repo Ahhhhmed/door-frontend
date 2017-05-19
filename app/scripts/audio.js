@@ -83,8 +83,8 @@ Visualizer.prototype = {
     // cwidth = canvas.width;
     // cheight = canvas.height - 2;
     // canvasCtx = canvas.getContext('2d');
-    var bufferLength = analyser.frequencyBinCount;
-    var dataArray = new Float32Array(bufferLength);
+    var bufferLength = analyser.frequencyBinCount ;
+    var dataArray = new Uint8Array(bufferLength);
     var data = new Array(bufferLength);
     for(var i=0, j = 0; i<bufferLength; j++ ){
       data[j] = {x:i*this.audioContext.sampleRate/analyser.fftSize};
@@ -98,7 +98,7 @@ Visualizer.prototype = {
     var that = this;
     function draw() {
       var drawVisual = requestAnimationFrame(draw);
-      analyser.getFloatFrequencyData(dataArray);
+      analyser.getByteFrequencyData(dataArray);
       //  that.clarty(analyser)
       // canvasCtx.fillStyle = 'rgb(0, 0, 0)';
       // canvasCtx.fillRect(0, 0, cwidth, cheight);
