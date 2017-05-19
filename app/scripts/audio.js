@@ -78,7 +78,7 @@ Visualizer.prototype = {
   },
   _drawSpectrum: function(analyser) {
     analyser.smoothingTimeConstant = 0.85;
-    analyser.fftSize = 1024;
+    analyser.fftSize = 4096;
     // canvas = document.getElementById('canvas');
     // cwidth = canvas.width;
     // cheight = canvas.height - 2;
@@ -87,7 +87,7 @@ Visualizer.prototype = {
     var dataArray = new Uint8Array(bufferLength);
     var data = new Array(bufferLength);
     for(var i=0; i<bufferLength; i++){
-      data[i] = {x:i};
+      data[i] = {x:i*this.audioContext.sampleRate/analyser.fftSize};
     }
 
 

@@ -84,15 +84,15 @@ var scatterChart = new Chart(ctx, {
         }
         ],
       xAxes: [{
-        type: 'linear',
+        type: 'logarithmic',
         position: 'bottom',
         gridLines: {
           display: false,
           drawBorder: false
         },
         ticks:{
-          min: 0,
-          max: 500
+          min: 20,
+          max: 22000
         }
       }]
     }
