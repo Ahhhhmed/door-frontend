@@ -1,6 +1,4 @@
-$waterColor: #a44497;
-$textColor1: white;
-$textColor2: black;
+@import "colors";
 
 .app{
   width: 100%;
@@ -24,7 +22,7 @@ $textColor2: black;
       fill: $textColor2;
     }
     .Circle {
-      fill: #ff3338;
+      fill: $lowColor;
     }
     .Wave {
       fill: $waterColor;
@@ -39,7 +37,7 @@ $textColor2: black;
       fill: $textColor2;
     }
     .Circle {
-      fill: #fff741;
+      fill: $mediumColor
     }
     .Wave {
       fill: $waterColor;
@@ -54,7 +52,7 @@ $textColor2: black;
       fill: $textColor2;
     }
     .Circle {
-      fill: #24ff1f;
+      fill: $highColor;
     }
     .Wave {
       fill: $waterColor;

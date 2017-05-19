@@ -1,9 +1,5 @@
-$backgroundColor1: #f0a2cc;
-$backgroundColor2: #3cb8a5;
+@import "colors";
 
-$foreground: #393eb5;
-
-$foreground-light:#34495e;
 
 
 $size:30px;
@@ -17,7 +13,7 @@ $transition-time:0.5s;
   height: 0;
   border-top: $size solid transparent;
   border-bottom: $size solid transparent;
-  border-left: ($size*$ratio) solid $foreground;
+  border-left: ($size*$ratio) solid $playButtonColor;
   margin: 0 auto;
   position:relative;
   z-index:1;
@@ -47,11 +43,11 @@ $transition-time:0.5s;
     opacity:0;
     width:($size*1.4);
     height:($size*1.6);
-    background:$foreground;
+    background: $playButtonColor;
     position:absolute;
     right: ($size*0.1);
     top: ($size*-0.8);
-    border-left:($size*0.45) solid $foreground;
+    border-left:($size*0.45) solid $playButtonColor;
     box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor2;
   }
 
@@ -62,11 +58,11 @@ $transition-time:0.5s;
       opacity:1;
       width:($size*1.4);
       height:($size*1.6);
-      background:$foreground;
+      background: $playButtonColor;
       position:absolute;
       right: ($size*0.1);
       top: ($size*-0.8);
-      border-left:($size*0.45) solid $foreground;
+      border-left:($size*0.45) solid $playButtonColor;
       box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor2;
       transition: 0.5s;
     }
