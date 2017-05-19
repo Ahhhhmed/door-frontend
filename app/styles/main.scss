@@ -54,6 +54,21 @@ $controlsHeightBig: 100px;
   transition: 0.5s;
 }
 
+.noUi-tooltip, .noUi-handle{
+  &::before, &::after{
+    opacity: 0;
+  }
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.noUi-tooltip{
+  background: unset;
+  border: unset;
+  color: $frequencyColor;
+  font-weight: 600;
+}
+
 .mode2{
   .app{
     height: calc(100% - #{$controlsHeightBig});
@@ -64,8 +79,8 @@ $controlsHeightBig: 100px;
     height: $controlsHeightBig;
     background: $backgroundColor1;
 
-    input[type=range]{
-      visibility: visible;
+    .noUi-tooltip, .noUi-handle{
+      opacity: 1;
     }
   }
 

@@ -13,5 +13,13 @@ $(document).ready(function() {
 });
 
 $( function() {
-  $( "#slider" ).slider();
+  noUiSlider.create($("#slider")[0], {
+    start: 440,
+    tooltips: true,
+    step: 1,
+    range:{
+      min: [1],
+      max: [20000]
+    }
+  });
 } );
