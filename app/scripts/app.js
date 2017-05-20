@@ -19,7 +19,6 @@ function setWaterColor(value) {
     water.removeClass('color-'+i);
   }
   water.addClass("color-"+value);
-  console.log(water[0]);
 }
 
 $( function() {
