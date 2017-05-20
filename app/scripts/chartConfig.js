@@ -62,8 +62,8 @@ var scatterChart = new Chart(ctx, {
         position: 'left',
         scaleShowLabels: false,
         ticks: {
-          min: 0,
-          max: 200
+          min: -130,
+          max: 0
         },
         gridLines: {
           display: false,
@@ -74,8 +74,8 @@ var scatterChart = new Chart(ctx, {
           display: dysplayYAxis,
           position: 'right',
           ticks: {
-            min: 0,
-            max: 200
+            min: -130,
+            max: 0
           },
           gridLines: {
             display: false,
@@ -92,7 +92,7 @@ var scatterChart = new Chart(ctx, {
         },
         ticks:{
           min: 10,
-          max: 20000,
+          max: 21000,
           callback: function(tick, index, ticks) {
             if(tick > 20000){
               return "";

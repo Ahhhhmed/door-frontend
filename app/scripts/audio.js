@@ -3,6 +3,7 @@ window.onload = function() {
   v = new Visualizer();
   v.ini();
 };
+
 var Visualizer = function() {
   this.audioContext = null;
   this.powerOfNoise = 0;
@@ -10,6 +11,7 @@ var Visualizer = function() {
   this.powerAfter = 0;
   this.count = 0;
   this.timer = null;
+  this.timer1 = null;
 
   this.analyser = null;
 
@@ -61,15 +63,20 @@ Visualizer.prototype = {
     analyser_node.fftSize = BUFF_SIZE_RENDERER;
 
     this.analyser = analyser_node;
-    var distortion = this.audioContext.createWaveShaper();
-    var biquadFilter = this.audioContext.createBiquadFilter();
-    var convolver = this.audioContext.createConvolver();
+    // var distortion = this.audioContext.createWaveShaper();
+    // var biquadFilter = this.audioContext.createBiquadFilter();
+    // var convolver = this.audioContext.createConvolver();
 
     microphone_stream.connect(analyser_node);
-    analyser_node.connect(distortion);
-    distortion.connect(biquadFilter);
-    biquadFilter.connect(convolver);
-    convolver.connect(gain_node);
+    // microphone_stream.connect(convolver);
+    // convolver.connect(analyser_node);
+    //
+    analyser_node.connect(gain_node);
+    // analyser_node.connect(distortion);
+    // distortion.connect(gain_node)
+    // distortion.connect(biquadFilter);
+    // biquadFilter.connect(convolver);
+    // convolver.connect(gain_node);
     gain_node.connect(this.audioContext.destination);
 
     this._drawSpectrum(analyser_node);
@@ -84,7 +91,7 @@ Visualizer.prototype = {
     // cheight = canvas.height - 2;
     // canvasCtx = canvas.getContext('2d');
     var bufferLength = analyser.frequencyBinCount ;
-    var dataArray = new Uint8Array(bufferLength);
+    var dataArray = new Float32Array(bufferLength);
     var data = new Array(bufferLength);
     for(var i=0, j = 0; i<bufferLength; j++ ){
       data[j] = {x:i*this.audioContext.sampleRate/analyser.fftSize};
@@ -98,7 +105,7 @@ Visualizer.prototype = {
     var that = this;
     function draw() {
       var drawVisual = requestAnimationFrame(draw);
-      analyser.getByteFrequencyData(dataArray);
+      analyser.getFloatFrequencyData(dataArray);
       //  that.clarty(analyser)
       // canvasCtx.fillStyle = 'rgb(0, 0, 0)';
       // canvasCtx.fillRect(0, 0, cwidth, cheight);
@@ -128,60 +135,87 @@ Visualizer.prototype = {
     draw();
   },
   clarty: function(analyser){
-
-    data = new Float32Array(analyser.frequencyBinCount);
+    // console.log(this.count)
+    var data = new Float32Array(analyser.frequencyBinCount);
     analyser.getFloatFrequencyData(data);
     data = data.map(function(x){
       return Math.pow(10, x/20);
     });
 
-    power = 0
+    var power = 0
     for(var i = 0, l = data.length; i < l; i++){
       var frequency = i*this.audioContext.sampleRate/analyser.fftSize;
       power += data[i]*frequency*data[i]*frequency;
     }
-    power -= this.powerOfNoise*this.count;
-    if(this.count < 80){
+    power -= this.powerOfNoise;
+    if(this.count < 50){
       // console.log(power);
       this.power80 += power*power;
       this.count += 1;
     } else{
-      if(this.count > 1000){
+      if(this.count > 500){
         this._result();
       }
       this.powerAfter += power*power;
       this.count += 1;
     }
   },
-  _beginFreq: function(analyser){
-    data = new Float32Array(analyser.frequencyBinCount);
+  _noisePower: function(analyser){
+    this.count += 1;
+
+    if(this.count > 100){
+      this._noise();
+    }
+    var data = new Float32Array(analyser.frequencyBinCount);
     analyser.getFloatFrequencyData(data);
     data = data.map(function(x){
       return Math.pow(10, x/20);
     });
-
+    var power = 0;
     for(var i = 0, l = data.length; i < l; i++){
       var frequency = i*this.audioContext.sampleRate/analyser.fftSize;
-      this.powerOfNoise += data[i]*frequency*data[i]*frequency;
+      power += data[i]*frequency*data[i]*frequency;
     }
+    this.powerOfNoise += power;
   },
   _result: function(){
     // console.log('radi');
     clearInterval(this.timer);
+    var c50;
     if(this.powerAfter == 0){
-      c80 = 0;
+      c50 = 0;
     } else{
-      c80 = 10*Math.log(this.power80/this.powerAfter);
+      c50 = 10*Math.log(this.power80/this.powerAfter);
     }
-    console.log(c80);
+    var value = function (c50) {
+      if(c50 > -5 && c50 < 4){
+        return 100;
+      }
+
+      var x = Math.min(Math.abs(c50 + 5), Math.abs(c50 - 4) );
+
+      return Math.max(0, 100 - Math.round(x));
+
+    };
+    gauge1.update(value(c50));
+    console.log(c50);
     this.id = 0;
+  },
+  _noise: function () {
+    // console.log("da");
+    clearInterval(this.timer1);
+    this.powerOfNoise /= this.count;
+    this.count = 0;
+    var that = this;
+    this.timer = setInterval(function() {that.clarty(that.analyser)}, 1);
   },
   _start: function(){
     if(this.id == 0){
-      this._beginFreq(this.analyser);
-      $.get('http://localhost:5000')
-      that = this;
-      this.timer = setInterval(function() {that.clarty(that.analyser)}, 1);
+      // this._beginFreq(this.analyser);
+      $.get('http://localhost:5000');
+      var that = this;
+      this.timer1 = setInterval(function() {that._noisePower(that.analyser)}, 1);
+      // this.timer = setInterval(function() {that.clarty(that.analyser)}, 1);
       this.id = 1;
     } else{
       console.log('majmune');
