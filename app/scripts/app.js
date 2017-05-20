@@ -13,14 +13,6 @@ $(document).ready(function() {
   });
 });
 
-function setWaterColor(value) {
-  var water = $('.gauge');
-  for(var i=1; i<= 100; i++){
-    water.removeClass('color-'+i);
-  }
-  water.addClass("color-"+value);
-}
-
 $( function() {
   noUiSlider.create($("#slider")[0], {
     start: 440,
