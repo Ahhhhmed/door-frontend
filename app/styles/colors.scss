@@ -1,5 +1,8 @@
-$backgroundColor1: #e9f0d5;
-$backgroundColor2: #6cacb8;
+$backgroundColor1: #edf4d9;
+$backgroundColor2: #9debf7;
+
+$backgroundColor1Controls: darken($backgroundColor2, 50);
+$backgroundColor2Controls: darken($backgroundColor1, 50);
 
 $playButtonColor: #393eb5;
 

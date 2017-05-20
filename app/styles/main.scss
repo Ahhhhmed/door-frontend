@@ -45,7 +45,7 @@ $controlsHeightBig: 100px;
 
 .controls{
   height: $controlsHeight;
-  background: $backgroundColor2;
+  background: $backgroundColor1Controls;
   transition: 0.5s;
 }
 
@@ -78,7 +78,7 @@ $controlsHeightBig: 100px;
 
   .controls{
     height: $controlsHeightBig;
-    background: $backgroundColor1;
+    background: $backgroundColor2Controls;
 
     .noUi-tooltip, .noUi-handle{
       opacity: 1;

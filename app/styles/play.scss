@@ -48,7 +48,7 @@ $transition-time:0.5s;
     right: ($size*0.1);
     top: ($size*-0.8);
     border-left:($size*0.45) solid $playButtonColor;
-    box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor2;
+    box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor1Controls;
   }
 
   &.active {
@@ -63,15 +63,15 @@ $transition-time:0.5s;
       right: ($size*0.1);
       top: ($size*-0.8);
       border-left:($size*0.45) solid $playButtonColor;
-      box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor2;
+      box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor1Controls;
       transition: 0.5s;
     }
   }
 }
 .mode2 .play.active:after {
-  box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor1;
+  box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor2Controls;
 }
 
 .mode2 .play:after {
-  box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor1;
+  box-shadow:inset ($size*0.45) 0 0 0 $backgroundColor2Controls;
 }

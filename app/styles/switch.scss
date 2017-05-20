@@ -20,7 +20,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: $backgroundColor1;
+  background-color: $backgroundColor2Controls;
   -webkit-transition: .5s;
   transition: .5s;
 }
@@ -38,7 +38,7 @@
 }
 
 input:checked + .switch-slider {
-  background-color: $backgroundColor2;
+  background-color: $backgroundColor1Controls;
 }
 
 //input:focus + .switch-slider {
