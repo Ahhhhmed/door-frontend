@@ -31,16 +31,16 @@ var scatterChart = new Chart(ctx, {
       borderWidth: "2",
       data: data1
     },
-      // {
-      //   fill: false,
-      //   borderColor: "#0956a2",
-      //   pointBorderColor: "rgba(0,0,0,0)",
-      //   pointBackgroundColor: "rgba(0,0,0,0)",
-      //   pointHoverBackgroundColor: "rgba(0,0,0,0)",
-      //   pointHoverBorderColor: "rgba(0,0,0,0)",
-      //   borderWidth: "2",
-      //   data: data1
-      // }
+      {
+        fill: false,
+        borderColor: "#0956a2",
+        pointBorderColor: "rgba(0,0,0,0)",
+        pointBackgroundColor: "rgba(0,0,0,0)",
+        pointHoverBackgroundColor: "rgba(0,0,0,0)",
+        pointHoverBorderColor: "rgba(0,0,0,0)",
+        borderWidth: "2",
+        data: []
+      }
       ]
   },
   options: {
@@ -53,7 +53,7 @@ var scatterChart = new Chart(ctx, {
       enabled: false
     },
     animation: {
-      duration: 100
+      duration: 50
     },
     scales: {
       yAxes:[
@@ -63,11 +63,11 @@ var scatterChart = new Chart(ctx, {
         scaleShowLabels: false,
         ticks: {
           min: -130,
-          max: 0
+          max: 20
         },
         gridLines: {
-          display: false,
-          drawBorder: false
+          display: true,
+          drawBorder: true
         },
       },
         {
@@ -75,11 +75,11 @@ var scatterChart = new Chart(ctx, {
           position: 'right',
           ticks: {
             min: -130,
-            max: 0
+            max: 20
           },
           gridLines: {
-            display: false,
-            drawBorder: false
+            display: true,
+            drawBorder: true
           },
         }
         ],
@@ -87,8 +87,8 @@ var scatterChart = new Chart(ctx, {
         type: 'logarithmic',
         position: 'bottom',
         gridLines: {
-          display: false,
-          drawBorder: false
+          display: true,
+          drawBorder: true
         },
         ticks:{
           min: 10,

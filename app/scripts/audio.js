@@ -14,8 +14,9 @@ var Visualizer = function() {
   this.timer1 = null;
 
   this.analyser = null;
+  this.gain_node = null;
+  this.noiseTimer = null;
 
-  this.id = 0;
 };
 Visualizer.prototype = {
   ini: function() {
@@ -51,8 +52,8 @@ Visualizer.prototype = {
   },
   _start_microphone: function(stream){
     var BUFF_SIZE_RENDERER = 16384;
-    var gain_node = this.audioContext.createGain();
-    gain_node.gain.value = 0; // postavljen na 0 jer ne treba da pusta zvuk
+    this.gain_node = this.audioContext.createGain();
+    this.gain_node.gain.value = 0; // postavljen na 0 jer ne treba da pusta zvuk
 
     var microphone_stream = this.audioContext.createMediaStreamSource(stream);
 
@@ -63,33 +64,21 @@ Visualizer.prototype = {
     analyser_node.fftSize = BUFF_SIZE_RENDERER;
 
     this.analyser = analyser_node;
-    // var distortion = this.audioContext.createWaveShaper();
-    // var biquadFilter = this.audioContext.createBiquadFilter();
-    // var convolver = this.audioContext.createConvolver();
 
     microphone_stream.connect(analyser_node);
-    // microphone_stream.connect(convolver);
-    // convolver.connect(analyser_node);
-    //
-    analyser_node.connect(gain_node);
-    // analyser_node.connect(distortion);
-    // distortion.connect(gain_node)
-    // distortion.connect(biquadFilter);
-    // biquadFilter.connect(convolver);
-    // convolver.connect(gain_node);
-    gain_node.connect(this.audioContext.destination);
+
+    analyser_node.connect(this.gain_node);
+
+    this.gain_node.connect(this.audioContext.destination);
 
     this._drawSpectrum(analyser_node);
 
 
   },
   _drawSpectrum: function(analyser) {
-    analyser.smoothingTimeConstant = 0.5;
+    analyser.smoothingTimeConstant = 0.9;
     analyser.fftSize = 4096;
-    // canvas = document.getElementById('canvas');
-    // cwidth = canvas.width;
-    // cheight = canvas.height - 2;
-    // canvasCtx = canvas.getContext('2d');
+
     var bufferLength = analyser.frequencyBinCount -250 ;
     var dataArray = new Float32Array(bufferLength);
     var data = new Array(bufferLength);
@@ -99,17 +88,11 @@ Visualizer.prototype = {
     }
 
 
-    console.log(dataArray);
-
-    // canvasCtx.clearRect(0, 0, cwidth, cheight);
     var that = this;
     function draw() {
       var drawVisual = requestAnimationFrame(draw);
       analyser.getFloatFrequencyData(dataArray);
-      // console.log(dataArray);
-      //  that.clarty(analyser)
-      // canvasCtx.fillStyle = 'rgb(0, 0, 0)';
-      // canvasCtx.fillRect(0, 0, cwidth, cheight);
+
       for(var i=0, j =0; i<bufferLength; j++){
         data[j].y = dataArray[i];
         i +=  Math.floor(i/50) + 1;
@@ -118,25 +101,10 @@ Visualizer.prototype = {
       scatterChart.data.datasets[0].data = data;
       scatterChart.update();
 
-      // console.log('asd');
-
-      // var barWidth = (cwidth / bufferLength) * 2.5;
-      // var barHeight;
-      // var x = 0;
-      //
-      // for(var i = 0; i < bufferLength; i++) {
-      //   barHeight = dataArray[i];
-      //
-      //   canvasCtx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
-      //   canvasCtx.fillRect(x,cheight-barHeight/2,barWidth,barHeight/2);
-      //
-      //   x += barWidth + 1;
-      // }
-    };
+   };
     draw();
   },
   clarty: function(analyser){
-    // console.log(this.count)
     var data = new Float32Array(analyser.frequencyBinCount);
     analyser.getFloatFrequencyData(data);
     data = data.map(function(x){
@@ -180,7 +148,7 @@ Visualizer.prototype = {
     this.powerOfNoise += power;
   },
   _result: function(){
-    // console.log('radi');
+    this.analyser.smoothingTimeConstant = 0.9;
     clearInterval(this.timer);
     var c50;
     if(this.powerAfter == 0){
@@ -200,28 +168,63 @@ Visualizer.prototype = {
     };
     gauge1.update(value(c50));
     setWaterColor(value(c50));
-    console.log(c50);
-    this.id = 0;
+    enablePlay();
+    // console.log(c50);
   },
   _noise: function () {
-    // console.log("da");
     clearInterval(this.timer1);
     this.powerOfNoise /= this.count;
     this.count = 0;
     var that = this;
+    console.log(sliderValue());
+    $.ajax({
+      type: "GET",
+      url: "/play",
+      data: {"freq" : sliderValue()}
+    });
     this.timer = setInterval(function() {that.clarty(that.analyser)}, 1);
   },
   _start: function(){
-    if(this.id == 0){
-      // this._beginFreq(this.analyser);
-      $.get('http://localhost:5000');
+    if(inMode2()){
+      this.analyser.smoothingTimeConstant = 0;
       var that = this;
       this.timer1 = setInterval(function() {that._noisePower(that.analyser)}, 1);
-      // this.timer = setInterval(function() {that.clarty(that.analyser)}, 1);
-      this.id = 1;
     } else{
-      console.log('majmune');
+      if(isActive()){
+        this._playNoise();
+      } else {
+        this._pauseNoise();
+      }
     }
 
+  },
+  _playNoise: function(){
+    var that = this;
+    $.get("/startNoise");
+    this.noiseTimer = setInterval(function () {
+      that._drawNoise();
+    }, 100);
+
+  },
+  _pauseNoise: function () {
+    $.get("/stopNoise");
+    clearInterval(this.noiseTimer);
+  },
+  _drawNoise(){
+
+    $.get("/fftNoise", function (data) {
+      // TODO srediti niz koji se dobije od servera, crta se lepo :D
+      var dataS = new Array(data.length);
+      for(var i=0 ; i<data.length; i++ ){
+        dataS[i] = {x: i*100};
+      }
+      for(var i=0 ; i<data.length; i++ ){
+        dataS[i].y = data[i];
+      }
+
+      scatterChart.data.datasets[1].data = dataS;
+      scatterChart.update();
+    });
   }
+
 }
