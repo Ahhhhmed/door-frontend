@@ -84,13 +84,13 @@ Visualizer.prototype = {
 
   },
   _drawSpectrum: function(analyser) {
-    analyser.smoothingTimeConstant = 0.85;
+    analyser.smoothingTimeConstant = 0.5;
     analyser.fftSize = 4096;
     // canvas = document.getElementById('canvas');
     // cwidth = canvas.width;
     // cheight = canvas.height - 2;
     // canvasCtx = canvas.getContext('2d');
-    var bufferLength = analyser.frequencyBinCount ;
+    var bufferLength = analyser.frequencyBinCount -250 ;
     var dataArray = new Float32Array(bufferLength);
     var data = new Array(bufferLength);
     for(var i=0, j = 0; i<bufferLength; j++ ){
@@ -106,6 +106,7 @@ Visualizer.prototype = {
     function draw() {
       var drawVisual = requestAnimationFrame(draw);
       analyser.getFloatFrequencyData(dataArray);
+      // console.log(dataArray);
       //  that.clarty(analyser)
       // canvasCtx.fillStyle = 'rgb(0, 0, 0)';
       // canvasCtx.fillRect(0, 0, cwidth, cheight);
@@ -198,6 +199,7 @@ Visualizer.prototype = {
 
     };
     gauge1.update(value(c50));
+    setWaterColor(value(c50));
     console.log(c50);
     this.id = 0;
   },
