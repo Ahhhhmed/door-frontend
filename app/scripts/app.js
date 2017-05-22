@@ -1,6 +1,10 @@
 
 
 function switchMode(){
+  if(!inMode2()){
+    v._pauseNoise();
+    $('.play').removeClass('active')
+  }
   $('body').toggleClass('mode2');
 }
 
