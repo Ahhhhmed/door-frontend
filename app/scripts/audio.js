@@ -213,14 +213,12 @@ Visualizer.prototype = {
   _drawNoise(){
 
     $.get("/fftNoise", function (data) {
-      // TODO srediti niz koji se dobije od servera, crta se lepo :D
+      var json = JSON.parse(data);
       var dataS = new Array(data.length);
-      for(var i=0 ; i<data.length; i++ ){
-        dataS[i] = {x: i*100};
-      }
-      for(var i=0 ; i<data.length; i++ ){
-        dataS[i].y = data[i];
-      }
+      Object.keys(json).forEach(function(key)
+      { dataS[i] = {"x": parseFloat(key), "y":json[key][0]};
+        i+=1;
+      });
 
       scatterChart.data.datasets[1].data = dataS;
       scatterChart.update();
