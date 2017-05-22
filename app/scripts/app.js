@@ -13,10 +13,11 @@ function isActive() {
 }
 
 function enablePlay() {
-
+  $('.loader').removeClass("loader active").addClass("play");
 }
 
 function disablePlay() {
+  $('.play').removeClass("play").addClass("loader");
 
 }
 
@@ -27,12 +28,14 @@ function sliderValue() {
 $(document).ready(function() {
   var icon = $('.play');
   icon.click(function() {
-    if(!inMode2()) {
-      icon.toggleClass('active');
-    } else{
-      disablePlay();
+    if(icon.hasClass("play")) {
+      if (!inMode2()) {
+        icon.toggleClass('active');
+      } else {
+        disablePlay();
+      }
+      v._start();
     }
-    v._start();
     return false;
   });
 });
