@@ -176,7 +176,7 @@ Visualizer.prototype = {
     this.powerOfNoise /= this.count;
     this.count = 0;
     var that = this;
-    console.log(sliderValue());
+    // console.log(sliderValue());
     $.ajax({
       type: "GET",
       url: "/play",
