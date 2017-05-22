@@ -209,6 +209,8 @@ Visualizer.prototype = {
   _pauseNoise: function () {
     $.get("/stopNoise");
     clearInterval(this.noiseTimer);
+    scatterChart.data.datasets[1].data = [];
+    scatterChart.update();
   },
   _drawNoise(){
 
