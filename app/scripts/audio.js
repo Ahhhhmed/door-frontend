@@ -80,8 +80,8 @@ Visualizer.prototype = {
 
   },
   _drawSpectrum: function(analyser) {
-    analyser.smoothingTimeConstant = 0.9;
-    analyser.fftSize = 4096;
+    analyser.smoothingTimeConstant = 0.8;
+    analyser.fftSize = 2048;
 
     var bufferLength = analyser.frequencyBinCount -250 ;
     var dataArray = new Float32Array(bufferLength);
@@ -152,7 +152,8 @@ Visualizer.prototype = {
     this.powerOfNoise += power;
   },
   _result: function(){
-    this.analyser.smoothingTimeConstant = 0.9;
+    this.analyser.smoothingTimeConstant = 0.8;
+    this.powerOfNoise = 0;
     clearInterval(this.timer);
     var c50;
     if(this.powerAfter == 0){
@@ -195,8 +196,10 @@ Visualizer.prototype = {
       this.timer1 = setInterval(function() {that._noisePower(that.analyser)}, 1);
     } else{
       if(isActive()){
+        this.analyser.smoothingTimeConstant = 0;
         this._playNoise();
       } else {
+        this.analyser.smoothingTimeConstant = 0.8;
         this._pauseNoise();
       }
     }
