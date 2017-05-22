@@ -1,7 +1,11 @@
 var v;
+var noise;
 window.onload = function() {
   v = new Visualizer();
   v.ini();
+  $.get("/fftNoise", function (data) {
+    noise = JSON.parse(data);
+  });
 };
 
 var Visualizer = function() {
@@ -209,13 +213,15 @@ Visualizer.prototype = {
   _pauseNoise: function () {
     $.get("/stopNoise");
     clearInterval(this.noiseTimer);
-    scatterChart.data.datasets[1].data = [];
-    scatterChart.update();
+    setTimeout(function (){
+      scatterChart.data.datasets[1].data = [];
+      scatterChart.update()
+    }, 10);
   },
   _drawNoise(){
 
-    $.get("/fftNoise", function (data) {
-      var json = JSON.parse(data);
+    $.get("/fftIndex", function (data) {
+      var json = noise[data];
       var dataS = new Array(data.length);
       var i = 0;
       var keys = [];
