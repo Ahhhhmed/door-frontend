@@ -215,6 +215,7 @@ Visualizer.prototype = {
     $.get("/fftNoise", function (data) {
       var json = JSON.parse(data);
       var dataS = new Array(data.length);
+      var i = 0;
       Object.keys(json).forEach(function(key)
       { dataS[i] = {"x": parseFloat(key), "y":json[key][0]};
         i+=1;
