@@ -14,16 +14,5 @@ config1.waveAnimateTime = 500;
 config1.waveRiseTime = 100;
 config1.colorsCss = true;
 config1.displayPercent = false;
-var gauge1 = loadLiquidFillGauge("fillgauge1", 55, config1);
+var gauge1 = loadLiquidFillGauge("fillgauge1", 0, config1);
 setWaterColor(55);
-
-function NewValue(){
-  var res;
-  if(Math.random() > .5){
-    res = Math.round(Math.random()*100);
-  } else {
-    res = (Math.random()*100).toFixed(1);
-  }
-  setWaterColor(Math.round(res));
-  return res;
-}
