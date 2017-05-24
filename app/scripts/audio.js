@@ -185,13 +185,18 @@ Visualizer.prototype = {
       c50 = 10*Math.log(this.energy50/this.energyAfter);
     }
     var value = function (c50) {
-      if(c50 > -5 && c50 < 4){
-        // po razlicitim radovima idealne vrednsti za faktor c50 se krecu izmedju - 2 i 2
-        // dodat je faktor losijih instrumenata
+      if(c50 > -5 && c50 < 5){
+        // Standard propisuje prihvatljive vrednosti -5 do 5 za c80
+        // kako je c50 manji od c80 ostavljen je isti interval prihvatljivosti zbog dosta losijih instrumenata od onih propisanih u standardu
+
         return 100;
       }
 
-      var x = Math.min(Math.abs(c50 + 5), Math.abs(c50 - 4) );
+      // ocena je procentualna u odnosu na onu iz standarda
+      // jer ulazi vise frekvencija u racun, interval dopustivljih vrednosti je prosiren
+      // nepreciznost i greska su veci
+      // tako da je ovo jedna dosta liberalna ocena akusticnosti sobe u odnosu c50 izmerenu po propisima u standardu
+      var x = Math.min(Math.abs(c50 + 5), Math.abs(c50 - 5) );
 
       return Math.max(0, 100 - Math.round(x));
 
@@ -249,6 +254,10 @@ Visualizer.prototype = {
   _drawNoise(){
 
     $.get("/fftIndex", function (data) {
+      // cita se fft koji salje server
+      // ovako bi frekvencijski spektar trebalo da izgleda
+      // razlika u amplitudama koja se javlja jeste zbog jacine koja je podesena na zvucniku i udaljenosti mikrofona
+      // treba oblik krive da bude isti u idealnom slucaju
       var json = noise[data];
       var dataS = new Array(data.length);
       var i = 0;
@@ -257,7 +266,8 @@ Visualizer.prototype = {
       {
           keys.push(key);
       });
-
+      // kljucevi u mapi nisu sortrani po vrednosti vec leksikografski
+      // pa to mora da se ispravi, zbog toga sort
       keys.sort(function (a, b) {
         return parseFloat(a)-parseFloat(b);
       });
